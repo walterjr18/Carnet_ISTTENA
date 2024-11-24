@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CARNET ISTTENA</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Fondo con imagen */
+        body {
+            background-image: url('fondo.png'); /* Ruta de la imagen de fondo */
+            background-size: cover; /* La imagen cubre toda la página */
+            background-position: center; /* Centra la imagen */
+            background-attachment: fixed; /* Hace que la imagen no se desplace al hacer scroll */
+            background-color: rgba(0, 0, 0, 0.2); /* Fondo semitransparente */
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Centra el contenido en la pantalla */
+        }
+
+        .container {
+            position: relative;
+            z-index: 1; /* Asegura que el contenido esté por encima del fondo */
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Estilos para las imágenes como botones sin bordes */
+        .logo-carreras {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .logo-carreras img {
+            cursor: pointer;
+            width: 200px; /* Aumenta el ancho */
+            height: 200px; /* Aumenta la altura */
+            transition: transform 0.2s;
+        }
+
+        .logo-carreras img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Estilos para el contenedor de las imágenes animadas */
+        .imagenes-animadas {
+            position: absolute;
+            top: 70%; /* Ajusta la posición vertical de las imágenes */
+            left: 50%;
+            transform: translateX(-50%); /* Centra las imágenes horizontalmente */
+        }
+
+        .imagenes-animadas img {
+            width: 30px;
+            height: 30px;
+            opacity: 0;
+            transform: scale(0);
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        /* Animación para las imágenes */
+        @keyframes mostrarImagen {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            30% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+            60% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+
+        /* Aplicamos la animación con diferentes retardos para cada imagen */
+        #imagen1 {
+            animation: mostrarImagen 15s infinite;
+            animation-delay: 0s;
+        }
+
+        #imagen2 {
+            animation: mostrarImagen 15s infinite;
+            animation-delay: 3.75s;
+        }
+
+        #imagen3 {
+            animation: mostrarImagen 15s infinite;
+            animation-delay: 7.5s;
+        }
+
+        #imagen4 {
+            animation: mostrarImagen 15s infinite;
+            animation-delay: 11.25s;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: black;
+        }
+
+        .footer a {
+            color: black;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container" id="carnet">
+        <div class="header">
+            <img src="logo_instituto.png" alt="Logo del Instituto" class="logo-instituto">
+        </div>
+       
+        <div class="form-container">
+            <form id="form-carnet">
+                <div class="footer">
+                    <p>SELECCIONAR CARRERA</p>
+                </div>
+                <div class="logo-carreras">
+                    <img src="administracion.png" alt="Logo de Administración" onclick="setCarrera('Tecnología Superior en Administración')">
+                    <img src="software.png" alt="Logo de Software" onclick="setCarrera('Tecnología Superior en Desarrollo de Software')">
+                    <img src="turismo.png" alt="Logo de Turismo" onclick="setCarrera('Tecnología Superior en Turismo')">
+                    <img src="educacion.png" alt="Logo de Educación" onclick="setCarrera('Tecnología Superior en Educación Inicial')">
+                </div>
+                <input type="text" id="carrera" placeholder="Selecciona una carrera" readonly>
+
+                <label for="cedula">Número de cédula:</label>
+                <input type="text" id="cedula" placeholder="Ingresar numero.." required inputmode="numeric" oninput="validarCedula()">
+
+                <label for="nombres">Nombres completos:</label>
+                <input type="text" id="nombres" placeholder="Nombres y Apellidos.." required oninput="validarNombres()">
+
+                <label for="nivel">Nivel:</label>
+                <select id="nivel" required>
+                    <option value="">Seleccionar Nivel</option>
+                    <option value="Primero">Primero</option>
+                    <option value="Segundo">Segundo</option>
+                    <option value="Tercero">Tercero</option>
+                    <option value="Cuarto">Cuarto</option>
+                    <option value="Quinto">Quinto</option>
+                </select>
+
+                <label for="paralelo">Paralelo:</label>
+                <select id="paralelo" required>
+                    <option value="">Seleccionar Paralelo</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                </select>
+
+                <label for="validez">Validez:</label>
+                <input type="text" id="validez" value="Diciembre 2025" readonly>
+
+                <label for="foto">Foto del Estudiante:</label>
+                <input type="file" id="foto" accept="image/*">
+
+                <button type="button" onclick="generarPDF()">Generar PDF</button>
+            </form>
+        </div>
+
+        <div class="footer">
+            <p><a href="https://www.itstena.edu.ec">https://www.itstena.edu.ec</a></p>
+            <p>Dirección: Km 1 ½ vía (Tena - Archidona)</p>
+            <p>Tena - Ecuador</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Detectar si es Firefox
+        if (navigator.userAgent.indexOf("Firefox") == -1) {
+            // Si no es Firefox, redirige a una página de error
+            alert("Esta página solo es compatible con Mozilla Firefox.");
+            window.location.href = "https://www.mozilla.org";  // Redirige a la página de descarga de Firefox
+        }
+
+        // Forzar vista de escritorio en móviles
+        if (window.innerWidth <= 800) {
+            document.querySelector("meta[name='viewport']").setAttribute('content', 'width=1024'); // Forzamos el ancho a 1024px para escritorio
+        }
+
+        function setCarrera(carrera) {
+            document.getElementById('carrera').value = carrera;
+        }
+
+        // Función para convertir los nombres a mayúsculas
+        function convertirAMayusculas() {
+            var nombres = document.getElementById('nombres');
+            nombres.value = nombres.value.toUpperCase();
+        }
+
+        // Función para validar la cédula (solo números)
+        function validarCedula() {
+            var cedula = document.getElementById('cedula');
+            cedula.value = cedula.value.replace(/[^0-9]/g, ''); // Elimina todo lo que no sea número
+        }
+
+        function validarNombres() {
+            var nombres = document.getElementById('nombres');
+            var valor = nombres.value;
+
+            // Elimina cualquier carácter que no sea letra o espacio
+            nombres.value = valor.replace(/[^a-zA-Z\s]/g, '');
+
+            // Convierte la primera letra de cada palabra a mayúscula y las demás a minúscula
+            nombres.value = nombres.value.replace(/\b\w/g, function(letra) {
+                return letra.toUpperCase();
+            }).replace(/\B\w/g, function(letra) {
+                return letra.toLowerCase();
+            });
+        }
+
+        // Llamar a la función cuando el campo de nombres pierda el foco
+        document.getElementById('nombres').addEventListener('blur', validarNombres);
+    </script>
+</body>
+</html>

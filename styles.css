@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 350px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    /* Eliminado el box-shadow */
+    background-color: transparent; /* Fondo transparente para el contenedor */
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.logo-instituto {
+    max-width: 1500px;
+}
+
+.logo-carreras {
+    display: flex;
+    justify-content: center; /* Centra las imágenes horizontalmente */
+    align-items: center;
+    margin: 20px 0;
+    gap: 10px; /* Espaciado entre imágenes */
+    width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+    max-width: 700px; /* Limita el ancho total de las imágenes para que no se desborden */
+    margin-left: auto; /* Alineación centrada */
+    margin-right: auto;
+}
+
+.logo-carreras img {
+    max-width: 100%; /* Asegura que las imágenes no excedan su contenedor */
+    height: auto;
+    flex: 1; /* Hace que todas las imágenes ocupen el mismo espacio */
+    max-height: 80px; /* Define la altura máxima para que encajen */
+    object-fit: contain; /* Escala las imágenes sin distorsión */
+}
+
+.form-container {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.form-container h3 {
+    text-align: center;
+}
+
+.form-container label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007BFF;
+    color: rgb(155, 196, 224);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.footer a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
